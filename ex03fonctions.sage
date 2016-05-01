@@ -6,7 +6,10 @@ def nombre_mersenne(p):
     """Retourne le nieme nombre de Mersenne"""
     return 2**p - 1
 
-def u(n):
-    """Retourne les n premiers termes de la suite u_n = pi(n)ln(n)/n""" 
-    for i in range(n): 
-        print(numerical_approx(prime_pi(i+1)*log(i+1,e)/(i+1)))
+def u(n):  
+    """Suite u_n = pi(n)ln(n)/n"""
+    return numerical_approx(prime_pi(n)*log(n,e)/n)
+
+def v(n):
+    """Suite v_n = n/ln(n)"""
+    return numerical_approx(n/log(n,e))

@@ -21,3 +21,14 @@ for i,j in zip(m_premiers,p): #Affichage
 
 print 'Les facteurs premiers de M41 sont: {}'.format(str(prime_factors(nombre_mersenne(41))).strip('[]'))
 print 'Les facteurs premiers de M47 sont: {}'.format(str(prime_factors(nombre_mersenne(47))).strip('[]'))
+
+#Test du theoreme des nombres premiers
+prime_pi(2**40) #maximum, marche ok
+
+#Affichage de pi(n) et n/ln(n)
+p1 = plot(prime_pi, 1, 1000, color='#ff00ff')
+p1 += plot(v, 1, 1000, color='#0000ff')
+
+#Affichage de u_n
+p2 = plot(u, 1, 10000, color='#0000ff')
+
