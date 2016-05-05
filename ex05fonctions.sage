@@ -28,3 +28,11 @@ def cleRSA(m):
     bezout = xgcd(e, phi)
     d = Integer(mod(bezout[1], phi))
     return (N, e, d) 
+
+def chiffrer(lst, e , N):
+    """Chiffre la liste lst"""
+    return [power_mod(m, e, N) for m in lst]
+
+def dechiffrer(lst, d, N):
+    """Dechiffre la liste lst"""
+    return [power_mod(m, d, N) for m in lst]
