@@ -1,3 +1,5 @@
+import random
+
 def numerise(msg, N):
     """Renvoie une liste d'entiers entre 0 et N-1 qui representent le message msg en utilisant le codage binaire, ainsi que L, la longueur du message""" 
     msg = BinaryStrings().encoding(msg) #encodage en binaire
@@ -15,15 +17,13 @@ def alphabetise(lst, N, L):
 
 def cleRSA(m):
     """Renvoie les parametres (N, e, d) avec nombre_de_chiffres(N) > m"""
-    #Generer p et q!!
     
-    p = random.randrange(10**(m/2 + 1),10**m);
-    q = random.randrange(10**(m/2 + 1),10**m);
-		
-	while(is_prime(p)==False) p=p+1 ;	
-	while(is_prime(q)==False) q=q+1 ;
-
-	
+    p = random.randrange(10**(m/2 + 1), 10**m)
+    q = random.randrange(10**(m/2 + 1), 10**m)
+        
+    while(is_prime(p) == False): p += 1  
+    while(is_prime(q) == False): q += 1 
+    
     N = p * q
     
     phi = (p-1) * (q-1)
