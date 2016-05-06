@@ -47,12 +47,12 @@ def dechiffrer(lst, d, N):
 def protocole1_sig(m1, s1, Na, da, Nb, eb):
     m1c, L1 = numerise(m1, Na)
     s1c, L2 = numerise(s1, Na)
-    m2c = chiffrer(m1c, Nb, eb)
-    s2c = chiffrer(s1c, Na, da)
+    m2c = chiffrer(m1c, eb, Nb)
+    s2c = chiffrer(s1c, da, Na)
     return m2c, s2c, L1, L2
 
 def protocole1_lec(m2c, s2c, Nb, db, Na, ea, L1, L2):
-    m2 = dechiffrer(m2c, Nb, db)
-    s2 = dechiffrer(s2c, Na, ea)
+    m2 = dechiffrer(m2c, db, Nb)
+    s2 = dechiffrer(s2c, ea, Na)
     print alphabetise(m2, Na, L1)
     print alphabetise(s2, Na, L2)
