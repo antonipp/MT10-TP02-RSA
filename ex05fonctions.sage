@@ -18,8 +18,8 @@ def alphabetise(lst, N, L):
 def cleRSA(m):
     """Renvoie les parametres (N, e, d) avec nombre_de_chiffres(N) > m"""
     
-    p = random.randrange(10**(m/2 + 1), 10**floor((m/2 + m/4)))
-    q = random.randrange(10**(m/2 + 1), 10**floor((m/2 + m/4)))
+    p = random.randrange(10**floor((m/2 + 1)), 10**floor((m/2 + m/4)))
+    q = random.randrange(10**floor((m/2 + 1)), 10**floor((m/2 + m/4)))
         
     while(is_prime(p) == False): p += 1  
     while(is_prime(q) == False): q += 1 
@@ -45,6 +45,7 @@ def dechiffrer(lst, d, N):
     return [power_mod(m, d, N) for m in lst]
 
 def protocole1_sig(m1, s1, Na, da, Nb, eb):
+    """Realise le chiffrement du message m1 et la signature s1 suivant le protocole 1"""
     m1c, L1 = numerise(m1, Na)
     s1c, L2 = numerise(s1, Na)
     m2c = chiffrer(m1c, eb, Nb)
@@ -52,7 +53,49 @@ def protocole1_sig(m1, s1, Na, da, Nb, eb):
     return m2c, s2c, L1, L2
 
 def protocole1_lec(m2c, s2c, Nb, db, Na, ea, L1, L2):
+    """Realise le dechiffrement du message m2c et la signature s2c suivant le protocole 1"""
+    print "Lecture..."
     m2 = dechiffrer(m2c, db, Nb)
     s2 = dechiffrer(s2c, ea, Na)
-    print alphabetise(m2, Na, L1)
-    print alphabetise(s2, Na, L2)
+    print "Message: " + alphabetise(m2, Na, L1)
+    print "Signature: " + alphabetise(s2, Na, L2)
+
+def protocole2_sig(m1, Na, da, Nb, eb):
+    """Realise le chiffrement du messsage m1 suivant le protocole 2"""
+    m1c, L = numerise(m1, Na)
+    if Na > Nb:
+        m2c = chiffrer(m1c, eb, Nb)
+        m3c = chiffrer(m2c, da, Na)
+    else:
+        m2c = chiffrer(m1c, da, Na)
+        m3c = chiffrer(m2c, eb, Nb)
+    return m3c, L
+
+def protocole2_lec(m3c, Nb, db, Na, ea, L):
+    """Realise le dechiffrement du message m3c suivant le protocle 2""" 
+    print "Lecture..."
+    if Na > Nb:
+        m2c = dechiffrer(m3c, ea, Na)
+        m1c = dechiffrer(m2c, db, Nb)
+    else:
+        m2c = dechiffrer(m3c, db, Nb)
+        m1c = dechiffrer(m3c, ea, Na)
+    print "Message: " + alphabetise(m1c, Na, L)
+
+
+def crackRSA(N, e):
+    """Trouve la clé privée à partir de la clé publique"""
+    t1 = walltime() 
+    
+    p, q = factor(N)
+    p = p[0]
+    q = q[0]
+    
+    phi = (p-1) * (q-1)
+
+    bezout = xgcd(e, phi)
+    d = Integer(mod(bezout[1], phi))
+
+    t = walltime(t1)
+    print 'La clé de {0} chiffres était cassée en {1:.2f}s'.format(len(str(N)), t)
+    return d
