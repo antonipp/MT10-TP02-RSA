@@ -27,7 +27,7 @@ def cleRSA(m):
     
     bezout = xgcd(e, phi)
     d = Integer(mod(bezout[1], phi))
-    return (N, e, d) 
+    return N, e, d
 
 def chiffrer(lst, e , N):
     """Chiffre la liste lst"""
@@ -36,3 +36,16 @@ def chiffrer(lst, e , N):
 def dechiffrer(lst, d, N):
     """Dechiffre la liste lst"""
     return [power_mod(m, d, N) for m in lst]
+
+def protocole1_sig(m1, s1, Na, da, Nb, eb):
+    m1c, L1 = numerise(m1, Na)
+    s1c, L2 = numerise(s1, Na)
+    m2c = chiffrer(m1c, Nb, eb)
+    s2c = chiffrer(s1c, Na, da)
+    return m2c, s2c, L1, L2
+
+def protocole1_lec(m2c, s2c, Nb, db, Na, ea, L1, L2):
+    m2 = dechiffrer(m2c, Nb, db)
+    s2 = dechiffrer(s2c, Na, ea)
+    print alphabetise(m2, Na, L1)
+    print alphabetise(s2, Na, L2)
