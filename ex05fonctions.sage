@@ -18,8 +18,8 @@ def alphabetise(lst, N, L):
 def cleRSA(m):
     """Renvoie les parametres (N, e, d) avec nombre_de_chiffres(N) > m"""
     
-    p = random.randrange(10**(m/2 + 1), 10**m)
-    q = random.randrange(10**(m/2 + 1), 10**m)
+    p = random.randrange(10**(m/2 + 1), 10**(m/2 + m/4))
+    q = random.randrange(10**(m/2 + 1), 10**(m/2 + m/4))
         
     while(is_prime(p) == False): p += 1  
     while(is_prime(q) == False): q += 1 
