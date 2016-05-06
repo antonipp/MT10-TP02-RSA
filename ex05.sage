@@ -1,8 +1,8 @@
 load("ex05fonctions.sage")
 
 #test du protocole 1
-Na, ea, da = cleRSA(30) #Alice
-Nb, eb, db = cleRSA(30) #Bob
+Na, ea, da = cleRSA(50) #Alice
+Nb, eb, db = cleRSA(50) #Bob
 
 m1 = raw_input("Entrez le message d'Alice: ")
 s1 = raw_input("Entrez la signature d'Alice: ")
