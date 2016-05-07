@@ -58,7 +58,7 @@ def protocole1_lec(m2c, s2c, Nb, db, Na, ea, L1, L2):
     m2 = dechiffrer(m2c, db, Nb)
     s2 = dechiffrer(s2c, ea, Na)
     print "Message: " + alphabetise(m2, Na, L1)
-    print "Signature: " + alphabetise(s2, Na, L2)
+    print "Signature: " + alphabetise(s2, Na, L2) + "\n"
 
 def protocole2_sig(m1, Na, da, Nb, eb):
     """Realise le chiffrement du messsage m1 suivant le protocole 2"""
@@ -79,12 +79,12 @@ def protocole2_lec(m3c, Nb, db, Na, ea, L):
         m1c = dechiffrer(m2c, db, Nb)
     else:
         m2c = dechiffrer(m3c, db, Nb)
-        m1c = dechiffrer(m3c, ea, Na)
-    print "Message: " + alphabetise(m1c, Na, L)
+        m1c = dechiffrer(m2c, ea, Na)
+    print "Message: " + alphabetise(m1c, Na, L) + "\n"
 
 
 def crackRSA(N, e):
-    """Trouve la clé privée à partir de la clé publique"""
+    """Trouve la clé privée à partir de la clé publique (~3min pour ~75 chiffres)"""
     t1 = walltime() 
     
     p, q = factor(N)
