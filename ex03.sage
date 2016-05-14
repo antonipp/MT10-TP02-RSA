@@ -10,12 +10,12 @@ while is_prime(F):
 print "Le nombre de Fermat F{0} = {1} n'est pas premier".format(n,F)
 
 #Test des nombres de Mersenne
-p = prime_range(257)
-print "Il y a {} nombres premiers inferieurs a 257".format(len(p))
-m = map(nombre_mersenne,p) #Liste des nombres de Mersenne
-m_premiers = map(is_prime,m) #On teste chaque nombre de la liste
+p = prime_range(258)
+print "Il y a {} nombres premiers inferieurs ou egaux a 257".format(len(p))
+m = map(nombre_mersenne, p) #Liste des nombres de Mersenne
+m_premiers = map(is_prime, m) #On teste chaque nombre de la liste
 
-for i,j in zip(m_premiers,p): #Affichage
+for i,j in zip(m_premiers, p): #Affichage
 	if i:
 		print "Le nombre de Mersenne M{0} est premier".format(j)
 
